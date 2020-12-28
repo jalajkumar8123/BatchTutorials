@@ -1,0 +1,396 @@
+1.  Request type :"Get"
+    URI : "localhost:9090/batchdetails"
+    Responce :{
+    "error": false,
+    "data": [
+        {
+            "id": 6,
+            "trainingDays": 120,
+            "totalCandidates": 100,
+            "clientShortName": "IBM",
+            "batchName": "java_IBM_20",
+            "type": "morniging",
+            "status": "inprogress",
+            "technology": "java",
+            "mentors": "kumar",
+            "startDate": "2020-07-01",
+            "endDate": "2020-12-01"
+        },
+        {
+            "id": 7,
+            "trainingDays": 120,
+            "totalCandidates": 100,
+            "clientShortName": "TCS",
+            "batchName": "java_TCs_20",
+            "type": "evening",
+            "status": "inprogress",
+            "technology": "java",
+            "mentors": "kumar",
+            "startDate": "2020-06-01",
+            "endDate": "2020-11-01"
+        },
+        {
+            "id": 8,
+            "trainingDays": 120,
+            "totalCandidates": 100,
+            "clientShortName": "IBM",
+            "batchName": "java_IBM_20",
+            "type": "evening",
+            "status": "inprogress",
+            "technology": "java",
+            "mentors": "kumar",
+            "startDate": "2020-05-01",
+            "endDate": "2020-10-01"
+        },
+        {
+            "id": 9,
+            "trainingDays": 120,
+            "totalCandidates": 100,
+            "clientShortName": "IBM",
+            "batchName": "java_IBM_20",
+            "type": "evening",
+            "status": "inprogress",
+            "technology": "java",
+            "mentors": "kumar",
+            "startDate": "2020-04-01",
+            "endDate": "2020-09-01"
+        },
+        {
+            "id": 11,
+            "trainingDays": 120,
+            "totalCandidates": 100,
+            "clientShortName": "TestYantra",
+            "batchName": "java_TY_20",
+            "type": "evening",
+            "status": "inprogress",
+            "technology": "java",
+            "mentors": "jalaj",
+            "startDate": "2020-03-01",
+            "endDate": "2020-08-01"
+        }
+    ],
+    "messege": ""
+}
+
+
+2.  Request type :"Get"
+    URI : "localhost:9090/batchdetails/6"
+    Responce :{
+                "error": false,
+                "data": {
+                    "id": 6,
+                    "trainingDays": 120,
+                    "totalCandidates": 100,
+                    "clientShortName": "IBM",
+                    "batchName": "java_IBM_20",
+                    "type": "morniging",
+                    "status": "inprogress",
+                    "technology": "java",
+                    "mentors": "kumar",
+                    "startDate": "2020-07-01",
+                    "endDate": "2020-12-01"
+                    },
+    "messege": ""
+}
+
+
+3. Request type :"Get"
+   URI : "localhost:9090/batchdetails/6/weeks"
+   Responce :{
+    "error": false,
+    "data": {
+        "id": 6,
+        "trainingDays": 120,
+        "totalCandidates": 100,
+        "clientShortName": "IBM",
+        "batchName": "java_IBM_20",
+        "type": "morniging",
+        "status": "inprogress",
+        "technology": "java",
+        "mentors": "kumar",
+        "startDate": "2020-07-01",
+        "endDate": "2020-12-01",
+        "weeks": [
+            {
+                "id": 1,
+                "startDate": "2020-07-01",
+                "endDate": "2020-07-07",
+                "noWeeks": 18,
+                "noDays": 7
+            },
+            {
+                "id": 2,
+                "startDate": "2020-07-08",
+                "endDate": "2020-07-14",
+                "noWeeks": 17,
+                "noDays": 7
+            },
+            {
+                "id": 3,
+                "startDate": "2020-07-15",
+                "endDate": "2020-07-21",
+                "noWeeks": 16,
+                "noDays": 7
+            }
+        ]
+    },
+    "messege": ""
+}
+
+4. Request type :"Get"
+   URI : "localhost:9090/batchdetails/6/weeks/dates"
+   Responce :{
+    "error": false,
+    "data": {
+        "id": 6,
+        "trainingDays": 120,
+        "totalCandidates": 100,
+        "clientShortName": "IBM",
+        "batchName": "java_IBM_20",
+        "type": "morniging",
+        "status": "inprogress",
+        "technology": "java",
+        "mentors": "kumar",
+        "startDate": "2020-07-01",
+        "endDate": "2020-12-01",
+        "weekdto": [
+            {
+                "id": 1,
+                "startDate": "2020-07-01",
+                "endDate": "2020-07-07",
+                "noWeeks": 18,
+                "noDays": 7,
+                "dates": [
+                    {
+                        "id": 1,
+                        "date": "2020-12-24",
+                        "status": "done"
+                    },
+                    {
+                        "id": 2,
+                        "date": "2020-12-23",
+                        "status": "done"
+                    },
+                    {
+                        "id": 3,
+                        "date": "2020-12-22",
+                        "status": "done"
+                    },
+                    {
+                        "id": 4,
+                        "date": "2020-12-21",
+                        "status": "done"
+                    },
+                    {
+                        "id": 5,
+                        "date": "2020-12-20",
+                        "status": "done"
+                    },
+                    {
+                        "id": 6,
+                        "date": "2020-12-19",
+                        "status": "done"
+                    }
+                ]
+            },
+            {
+                "id": 2,
+                "startDate": "2020-07-08",
+                "endDate": "2020-07-14",
+                "noWeeks": 17,
+                "noDays": 7,
+                "dates": []
+            },
+            {
+                "id": 3,
+                "startDate": "2020-07-15",
+                "endDate": "2020-07-21",
+                "noWeeks": 16,
+                "noDays": 7,
+                "dates": []
+            }
+        ]
+    },
+    "messege": ""
+}
+
+5. Request type :"Get"
+   URI : "localhost:9090/weekdetails/1"
+   Responce :{
+    "error": false,
+    "data": {
+        "id": 1,
+        "startDate": "2020-07-01",
+        "endDate": "2020-07-07",
+        "noWeeks": 18,
+        "noDays": 7,
+        "dates": [
+            {
+                "id": 1,
+                "date": "2020-12-24",
+                "status": "done"
+            },
+            {
+                "id": 2,
+                "date": "2020-12-23",
+                "status": "done"
+            },
+            {
+                "id": 3,
+                "date": "2020-12-22",
+                "status": "done"
+            },
+            {
+                "id": 4,
+                "date": "2020-12-21",
+                "status": "done"
+            },
+            {
+                "id": 5,
+                "date": "2020-12-20",
+                "status": "done"
+            },
+            {
+                "id": 6,
+                "date": "2020-12-19",
+                "status": "done"
+            }
+        ]
+    },
+    "messege": ""
+}
+
+
+6.   Request type :"Post"
+     URI : "localhost:9090/batchdetails/"
+     Request Body : {
+        "trainingDays": 120,
+        "totalCandidates": 100,
+        "clientShortName": "TestYantra",
+        "batchName": "java_TY_20",
+        "type": "Afternoon",
+        "status": "inprogress",
+        "technology": "java",
+        "mentors": "kumar",
+        "startDate": "2020-08-01",
+        "endDate": "2021-01-01"
+    }
+  Responce type: {
+    "error": false,
+    "data": {
+        "id": 12,
+        "trainingDays": 120,
+        "totalCandidates": 100,
+        "clientShortName": "TestYantra",
+        "batchName": "java_TY_20",
+        "type": "Afternoon",
+        "status": "inprogress",
+        "technology": "java",
+        "mentors": "kumar",
+        "startDate": "2020-08-01",
+        "endDate": "2021-01-01"
+    },
+    "messege": ""
+  }
+
+7.  Request type :"Put"
+    URI : "localhost:9090/batchdetails"
+    Rquest Body : {
+        "id": 12,
+        "trainingDays": 120,
+        "totalCandidates": 100,
+        "clientShortName": "TestYantra",
+        "batchName": "java_TY_20",
+        "type": "Afternoon",
+        "status": "inprogress",
+        "technology": "java",
+        "mentors": "jalaj kumar",
+        "startDate": "2020-08-01",
+        "endDate": "2021-01-01"
+    }
+    Responce type: {
+    "error": false,
+    "data": {
+        "id": 12,
+        "trainingDays": 120,
+        "totalCandidates": 100,
+        "clientShortName": "TestYantra",
+        "batchName": "java_TY_20",
+        "type": "Afternoon",
+        "status": "inprogress",
+        "technology": "java",
+        "mentors": "jalaj kumar",
+        "startDate": "2020-08-01",
+        "endDate": "2021-01-01"
+    },
+    "messege": ""
+}
+
+8.  Request type :"Delete"
+    URI : "localhost:9090/deletdetails/9"
+    Responce type : {
+    "error": false,
+    "data": "{ Deleted successfully }",
+    "messege": ""
+}
+
+9. Request type : "Post"
+   URI : "localhost:9090/weeks"
+   Request Body : {
+    
+    "startDate": "2020-07-08",
+        "endDate": "2020-07-14",
+        "noWeeks": 17,
+        "noDays": 7,
+        "status":"done",
+        "weekname":"week4"
+}
+
+Responce type :{
+    "id": 13,
+    "startDate": "2020-07-08",
+    "endDate": "2020-07-14",
+    "noWeeks": 17,
+    "noDays": 7
+}
+
+10.  Request type : "Get"
+     URI : "localhost:9090/dates"
+     Responce Body : {
+    "error": false,
+    "data": [
+        {
+            "id": 1,
+            "date": "2020-12-24",
+            "status": "done"
+        },
+        {
+            "id": 2,
+            "date": "2020-12-23",
+            "status": "done"
+        },
+        {
+            "id": 3,
+            "date": "2020-12-22",
+            "status": "done"
+        },
+        {
+            "id": 4,
+            "date": "2020-12-21",
+            "status": "done"
+        },
+        {
+            "id": 5,
+            "date": "2020-12-20",
+            "status": "done"
+        },
+        {
+            "id": 6,
+            "date": "2020-12-19",
+            "status": "done"
+        }
+    ],
+    "messege": ""
+     }
+
+
