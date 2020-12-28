@@ -7,14 +7,13 @@ import org.springframework.stereotype.Component;
 import com.testyantra.tutorialsbatch.entities.Dates;
 
 @Component
-public class WeekDto
-{
+public class WeekDto {
 	private int id;
-	private String startdate;
-	private String enddate;
-	private int noweeks;
-	private int nodays;
-	
+	private String startDate;
+	private String endDate;
+	private int noWeeks;
+	private int noDays;
+
 	private List<Dates> dates;
 
 	public int getId() {
@@ -25,36 +24,36 @@ public class WeekDto
 		this.id = id;
 	}
 
-	public String getStartdate() {
-		return startdate;
+	public String getStartDate() {
+		return startDate;
 	}
 
-	public void setStartdate(String startdate) {
-		this.startdate = startdate;
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
 	}
 
-	public String getEnddate() {
-		return enddate;
+	public String getEndDate() {
+		return endDate;
 	}
 
-	public void setEnddate(String enddate) {
-		this.enddate = enddate;
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
 
-	public int getNoweeks() {
-		return noweeks;
+	public int getNoWeeks() {
+		return noWeeks;
 	}
 
-	public void setNoweeks(int noweeks) {
-		this.noweeks = noweeks;
+	public void setNoWeeks(int noWeeks) {
+		this.noWeeks = noWeeks;
 	}
 
-	public int getNodays() {
-		return nodays;
+	public int getNoDays() {
+		return noDays;
 	}
 
-	public void setNodays(int nodays) {
-		this.nodays = nodays;
+	public void setNoDays(int noDays) {
+		this.noDays = noDays;
 	}
 
 	public List<Dates> getDates() {
@@ -64,7 +63,5 @@ public class WeekDto
 	public void setDates(List<Dates> dates) {
 		this.dates = dates;
 	}
-	
-	
 
 }

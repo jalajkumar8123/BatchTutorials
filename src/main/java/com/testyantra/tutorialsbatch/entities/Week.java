@@ -5,8 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.joda.time.DateTime;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
 public class Week
@@ -14,79 +12,64 @@ public class Week
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
-	private String startdate;
-	private String enddate;
-	private int noweeks;
-	private int nodays;
+	private String startDate;
+	private String endDate;
+	private int noWeeks;
+	private int noDays;
 	
 	//@Autowired
 	//private Datedetails datedetails;
 	
 	public Week() {}
 
-	public Week(int id, String startdate, String enddate, int noweeks, int nodays) {
+	public Week(int id, String startDate, String endDate, int noWeeks, int noDays) {
 		super();
 		this.id = id;
-		this.startdate = startdate;
-		this.enddate = enddate;
-		this.noweeks = noweeks;
-		this.nodays = nodays;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.noWeeks = noWeeks;
+		this.noDays = noDays;
 		//this.datedetails = datedetails;
 	}
 
-	public int getWeekid() {
+	public int getId() {
 		return id;
 	}
 
-	public void setWeekid(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	public String getStartdate() {
-		return startdate;
+	public String getStartDate() {
+		return startDate;
 	}
 
-	public void setStartdate(String startdate) {
-		this.startdate = startdate;
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
 	}
 
-	public String getEnddate() {
-		return enddate;
+	public String getEndDate() {
+		return endDate;
 	}
 
-	public void setEnddate(String enddate) {
-		this.enddate = enddate;
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
 
-	public int getNoweeks() {
-		return noweeks;
+	public int getNoWeeks() {
+		return noWeeks;
 	}
 
-	public void setNoweeks(int noweeks) {
-		this.noweeks = noweeks;
+	public void setNoWeeks(int noWeeks) {
+		this.noWeeks = noWeeks;
 	}
 
-	public int getNodays() {
-		return nodays;
+	public int getNoDays() {
+		return noDays;
 	}
 
-	public void setNodays(int nodays) {
-		this.nodays = nodays;
+	public void setNoDays(int noDays) {
+		this.noDays = noDays;
 	}
 
-	/*
-	 * public Datedetails getDatedetails() { return datedetails; }
-	 * 
-	 * public void setDatedetails(Datedetails datedetails) { this.datedetails =
-	 * datedetails; }
-	 */
-
-	@Override
-	public String toString() {
-		return "Week [id=" + id + ", startdate=" + startdate + ", enddate=" + enddate + ", noweeks=" + noweeks
-				+ ", nodays=" + nodays + ", datedetails="  + "]";
-	}
-	
-	
-	
 }

@@ -23,74 +23,81 @@ import com.testyantra.tutorialsbatch.entities.Week;
 import com.testyantra.tutorialsbatch.entities.WeekDate;
 import com.testyantra.tutorialsbatch.service.BatchService;
 
-
-
 @RestController
 public class BatchController {
 
 	@Autowired
-	private BatchService bservice;
+	private BatchService batchService;
 	@Autowired
 	private ResponceDto responce;
 	@Autowired
-	private BatchDto batchdto;
+	private BatchDto batchDto;
 	@Autowired
-	private WeekDto weekdto;
+	private WeekDto weekDto;
 	@Autowired
-	BatchFullDto fulldetail ;
-	
-	
+	BatchFullDto fullDetail;
+
 	@GetMapping("/batchdetails")
-	public ResponceDto getbatchdetails() {
+	public ResponceDto getBatchDetails() {
 		try {
-		responce.setData(this.bservice.getbatchdetails());
-		responce.setMessege("");responce.setError(false);return responce;
-		}catch(Exception e) {responce.setError(true);responce.setMessege(e.getMessage());}
+			responce.setData(this.batchService.getBatchDetails());
+			responce.setMessege("");
+			responce.setError(false);
+			return responce;
+		} catch (Exception e) {
+			responce.setError(true);
+			responce.setMessege(e.getMessage());
+		}
 		return responce;
 	}
 
 	@GetMapping("/batchdetails/{batchid}")
-	public ResponceDto getbatchdetail(@PathVariable String batchid) {
+	public ResponceDto getBatchDetailById(@PathVariable String batchId) {
 		try {
-		responce.setData(this.bservice.getbatchdetail(Integer.parseInt(batchid)));
-		responce.setError(false);responce.setMessege("");return responce;
-		}catch(Exception e) {responce.setError(true);responce.setMessege(e.getMessage());}
+			responce.setData(this.batchService.getBatchDetail(Integer.parseInt(batchId)));
+			responce.setError(false);
+			responce.setMessege("");
+			return responce;
+		} catch (Exception e) {
+			responce.setError(true);
+			responce.setMessege(e.getMessage());
+		}
 		return responce;
 
 	}
 
 	@GetMapping("/batchdetails/{batchid}/weeks")
-	public ResponceDto getbatchweekdetails(@PathVariable String batchid) {
-		try{
-		batchdto = new BatchDto();
-		Batch b = bservice.getbatchdetail(Integer.parseInt(batchid));
-		batchdto.setId(b.getId());
-		batchdto.setBatchName(b.getBatchName());
-		batchdto.setClientShortName(b.getClientShortName());
-		batchdto.setEnddate(b.getEnddate());
-		batchdto.setMentors(b.getMentors());
-		batchdto.setStartdate(b.getStartdate());
-		batchdto.setStatus(b.getStatus());
-		batchdto.setTechnology(b.getTechnology());
-		batchdto.setTotalcandidates(b.getTotalcandidates());
-		batchdto.setTrainingdays(b.getTrainingdays());
-		batchdto.setType(b.getType());
-		System.err.print(b.toString());
-		List<BatchWeek> batchweeks = this.bservice.getbatchweekdetail(Integer.parseInt(batchid));
-		List<Week> weeks = new ArrayList<>();
-		for (BatchWeek batchweek : batchweeks) {
-			Week week = batchweek.getWeek();
-			System.err.print("week details " + week.toString());
-			weeks.add(week);
-		}
-		batchdto.setWeeks(weeks);
-		responce.setError(false);
-		responce.setData(batchdto);
-		responce.setMessege("");
-		return responce;
-		}
-		catch(Exception e)
-		{
+	public ResponceDto getBatchWeekDetails(@PathVariable String batchId) {
+		
+		try {
+			batchDto = new BatchDto();
+			Batch b = batchService.getBatchDetail(Integer.parseInt(batchId));
+			
+			batchDto.setId(b.getId());
+			batchDto.setBatchName(b.getBatchName());
+			batchDto.setClientShortName(b.getClientShortName());
+			batchDto.setEndDate(b.getEndDate());
+			batchDto.setMentors(b.getMentors());
+			batchDto.setStartDate(b.getStartDate());
+			batchDto.setStatus(b.getStatus());
+			batchDto.setTechnology(b.getTechnology());
+			batchDto.setTotalCandidates(b.getTotalCandidates());
+			batchDto.setTrainingDays(b.getTrainingDays());
+			batchDto.setType(b.getType());
+			System.err.print(b.toString());
+			List<BatchWeek> batchWeeks = this.batchService.getBatchWeekDetail(Integer.parseInt(batchId));
+			List<Week> weeks = new ArrayList<>();
+			for (BatchWeek batchWeek : batchWeeks) {
+				Week week = batchWeek.getWeek();
+				System.err.print("week details " + week.toString());
+				weeks.add(week);
+			}
+			batchDto.setWeeks(weeks);
+			responce.setError(false);
+			responce.setData(batchDto);
+			responce.setMessege("");
+			return responce;
+		} catch (Exception e) {
 			responce.setData(null);
 			responce.setError(true);
 			responce.setMessege(e.toString());
@@ -98,132 +105,164 @@ public class BatchController {
 		return responce;
 	}
 
-	
-	  @GetMapping("/batchdetails/{batchid}/weeks/dates") 
-	  public ResponceDto getfulldetails(@PathVariable String batchid) { 
-		   
-		  try {
-		  Batch batch =bservice.getbatchdetail(Integer.parseInt(batchid));
-		  fulldetail.setId(batch.getId()); fulldetail.setBatchName(batch.getBatchName());
-		  fulldetail.setClientShortName(batch.getClientShortName());
-		  fulldetail.setEnddate(batch.getEnddate()); fulldetail.setMentors(batch.getMentors());
-		  fulldetail.setStartdate(batch.getStartdate());
-		  fulldetail.setStatus(batch.getStatus());
-		  fulldetail.setTechnology(batch.getTechnology());
-		  fulldetail.setTotalcandidates(batch.getTotalcandidates());
-		  fulldetail.setTrainingdays(batch.getTrainingdays());
-		  fulldetail.setType(batch.getType());
-	  
-	  List<BatchWeek> batchweeklist = bservice.getbatchweekdetail(Integer.parseInt(batchid));
-	  List<WeekDto> weekdtolist = new ArrayList<>();
-	  
-	  for(BatchWeek batchweek :batchweeklist) {
-		  
-		  System.err.println("Batch week "+ batchweek.getId()+" batch id "+batchweek.getBatch().getId()+" week id "+batchweek.getWeek().getWeekid());
-		  
-		  //int weekid = batchweek.getWeek().getWeekid();
-		 // Week week = batchweek.getWeek();
-		  WeekDto weekdtolp=new WeekDto(); 
-		  weekdtolp.setId(batchweek.getWeek().getWeekid()); 
-		  weekdtolp.setNodays(batchweek.getWeek().getNodays());
-		  weekdtolp.setEnddate(batchweek.getWeek().getEnddate());
-		  weekdtolp.setNoweeks(batchweek.getWeek().getNoweeks());
-		  weekdtolp.setStartdate(batchweek.getWeek().getStartdate());
-		 weekdtolist.add(weekdtolp);
-	  	}
-	  for(WeekDto weekdto : weekdtolist) {
-	  List<WeekDate> weekdates = this.bservice.getweekdatedetail(weekdto.getId());
-	  List<Dates> dates = new ArrayList<>();
-		for (WeekDate weekdate : weekdates) {
-			Dates date = weekdate.getDate();
-			dates.add(date);
-		}
-		weekdto.setDates(dates);
-	  }
-	  
-	  	   //weekdtolist.add(weekdto);
-	  	   fulldetail.setWeekdto(weekdtolist);
-		   responce.setData(fulldetail);
-		   responce.setError(false);
-		   responce.setMessege("");
-		   return responce;
-		  }
-		  catch (Exception e) {
+	@GetMapping("/batchdetails/{batchid}/weeks/dates")
+	public ResponceDto getFullDetails(@PathVariable String batchId) {
+
+		try {
+			Batch batch = batchService.getBatchDetail(Integer.parseInt(batchId));
+			
+			fullDetail.setId(batch.getId());
+			fullDetail.setBatchName(batch.getBatchName());
+			fullDetail.setClientShortName(batch.getClientShortName());
+			fullDetail.setEndDate(batch.getEndDate());
+			fullDetail.setMentors(batch.getMentors());
+			fullDetail.setStartDate(batch.getStartDate());
+			fullDetail.setStatus(batch.getStatus());
+			fullDetail.setTechnology(batch.getTechnology());
+			fullDetail.setTotalCandidates(batch.getTotalCandidates());
+			fullDetail.setTrainingDays(batch.getTrainingDays());
+			fullDetail.setType(batch.getType());
+
+			List<BatchWeek> batchWeekList = batchService.getBatchWeekDetail(Integer.parseInt(batchId));
+			List<WeekDto> weekDtoList = new ArrayList<>();
+
+			for (BatchWeek batchWeek : batchWeekList) {
+
+				System.err.println("Batch week " + batchWeek.getId() + " batch id " + batchWeek.getBatch().getId()
+						+ " week id " + batchWeek.getWeek().getId());
+
+				// int weekid = batchweek.getWeek().getWeekid();
+				// Week week = batchweek.getWeek();
+				WeekDto weekDtoLp = new WeekDto();
+				weekDtoLp.setId(batchWeek.getWeek().getId());
+				weekDtoLp.setNoDays(batchWeek.getWeek().getNoDays());
+				weekDtoLp.setEndDate(batchWeek.getWeek().getEndDate());
+				weekDtoLp.setNoWeeks(batchWeek.getWeek().getNoWeeks());
+				weekDtoLp.setStartDate(batchWeek.getWeek().getStartDate());
+				weekDtoList.add(weekDtoLp);
+			}
+			for (WeekDto weekDto : weekDtoList) {
+				List<WeekDate> weekDates = this.batchService.getWeekDateDetail(weekDto.getId());
+				List<Dates> dates = new ArrayList<>();
+				for (WeekDate weekDate : weekDates) {
+					Dates date = weekDate.getDate();
+					dates.add(date);
+				}
+				weekDto.setDates(dates);
+			}
+
+			// weekdtolist.add(weekdto);
+			fullDetail.setWeekdto(weekDtoList);
+			responce.setData(fullDetail);
+			responce.setError(false);
+			responce.setMessege("");
+			return responce;
+		} catch (Exception e) {
 			// TODO: handle exception
-			  responce.setData(null);responce.setError(true);responce.setMessege(e.getMessage());
+			responce.setData(null);
+			responce.setError(true);
+			responce.setMessege(e.getMessage());
 		}
 		return responce;
 	}
-	 
 
 	@GetMapping("/weekdetails/{weekid}")
-	public ResponceDto getweekdatedetails(@PathVariable String weekid) {
+	public ResponceDto getWeekDateDetails(@PathVariable String weekId) {
+		
 		try {
-		
-		Week w = bservice.getweekdetail(Integer.parseInt(weekid));
-		weekdto.setId(w.getWeekid());
-		weekdto.setEnddate(w.getEnddate());
-		weekdto.setNodays(w.getNodays());
-		weekdto.setNoweeks(w.getNoweeks());
-		weekdto.setStartdate(w.getStartdate());
-		List<WeekDate> weekdates = this.bservice.getweekdatedetail(Integer.parseInt(weekid));
-		List<Dates> dates = new ArrayList<>();
-		for (WeekDate weekdate : weekdates) {
-			Dates date = weekdate.getDate();
-			dates.add(date);
-		}
-		weekdto.setDates(dates);
-		responce.setData(weekdto);responce.setError(false);responce.setMessege("");
-		
-		return responce;
-		}catch(Exception  e) {responce.setData(null);responce.setError(true);responce.setMessege(e.getMessage());
-		return responce;
+
+			Week week = batchService.getWeekDetail(Integer.parseInt(weekId));
+			weekDto.setId(week.getId());
+			weekDto.setEndDate(week.getEndDate());
+			weekDto.setNoDays(week.getNoDays());
+			weekDto.setNoWeeks(week.getNoWeeks());
+			weekDto.setStartDate(week.getStartDate());
+			List<WeekDate> weekdates = this.batchService.getWeekDateDetail(Integer.parseInt(weekId));
+			List<Dates> dates = new ArrayList<>();
+			for (WeekDate weekdate : weekdates) {
+				Dates date = weekdate.getDate();
+				dates.add(date);
+			}
+			weekDto.setDates(dates);
+			responce.setData(weekDto);
+			responce.setError(false);
+			responce.setMessege("");
+
+			return responce;
+		} catch (Exception e) {
+			responce.setData(null);
+			responce.setError(true);
+			responce.setMessege(e.getMessage());
+			return responce;
 		}
 	}
 
 	@PostMapping("/batchdetails")
-	public ResponceDto addbatchdetail(@RequestBody Batch batch) {
+	public ResponceDto addBatchDetail(@RequestBody Batch batch) {
+		
 		try {
-			responce.setData(this.bservice.addbatch(batch));
-			responce.setError(false);responce.setMessege("");return responce;
-			}catch(Exception e) {responce.setData(null);responce.setError(true);responce.setMessege(e.getMessage());}
+			responce.setData(this.batchService.addBatch(batch));
+			responce.setError(false);
+			responce.setMessege("");
 			return responce;
+		} catch (Exception e) {
+			responce.setData(null);
+			responce.setError(true);
+			responce.setMessege(e.getMessage());
+		}
+		return responce;
 	}
 
 	@PutMapping("/batchdetails")
 	public ResponceDto update(@RequestBody Batch batch) {
+		
 		try {
-			responce.setData(this.bservice.update(batch));
-			responce.setError(false);responce.setMessege("");return responce;
-			}catch(Exception e) {responce.setData(null);responce.setError(true);responce.setMessege(e.getMessage());}
+			responce.setData(this.batchService.update(batch));
+			responce.setError(false);
+			responce.setMessege("");
 			return responce;
+		} catch (Exception e) {
+			responce.setData(null);
+			responce.setError(true);
+			responce.setMessege(e.getMessage());
+		}
+		return responce;
 	}
 
 	@DeleteMapping("/deletdetails/{batchid}")
 	public ResponceDto delete(@PathVariable String batchid) {
-		try{
-			bservice.delete(Integer.parseInt(batchid));
+		try {
+			batchService.delete(Integer.parseInt(batchid));
 			responce.setData("{ Deleted successfully }");
-			responce.setError(false);responce.setMessege("");
+			responce.setError(false);
+			responce.setMessege("");
 			return responce;
-		}catch(Exception e) {responce.setData(null);responce.setError(true);responce.setMessege(e.getMessage());}
+		} catch (Exception e) {
+			responce.setData(null);
+			responce.setError(true);
+			responce.setMessege(e.getMessage());
+		}
 		return responce;
 	}
 
 	@PostMapping("/weeks")
-	public Week addfulldetail(@RequestBody Week week) {
-		return this.bservice.addweek(week);
+	public Week addFullDetail(@RequestBody Week week) {
+		return this.batchService.addWeek(week);
 	}
 
 	@GetMapping("/dates")
-	public ResponceDto getdatedetails() {
+	public ResponceDto getDateDetails() {
 		try {
-			responce.setData(this.bservice.getdatedetails());
-			responce.setError(false);responce.setMessege("");
-		return responce;
-		}catch(Exception e) {responce.setData(null);responce.setError(true);responce.setMessege(e.getMessage());
-		return responce;
-	}
+			responce.setData(this.batchService.getDateDetails());
+			responce.setError(false);
+			responce.setMessege("");
+			return responce;
+		} catch (Exception e) {
+			responce.setData(null);
+			responce.setError(true);
+			responce.setMessege(e.getMessage());
+			return responce;
+		}
 	}
 
 }

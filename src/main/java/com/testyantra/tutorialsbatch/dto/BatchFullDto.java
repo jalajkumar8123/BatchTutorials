@@ -1,19 +1,23 @@
 package com.testyantra.tutorialsbatch.dto;
 
-
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-
 @Component
-public class BatchFullDto 
-{
+public class BatchFullDto {
 	private int id;
-	private int trainingdays,totalcandidates;
-	private String clientShortName,batchName,type,status,technology,mentors;
-	private String startdate,enddate;
-	
+	private int trainingDays;
+	private int totalCandidates;
+	private String clientShortName;
+	private String batchName;
+	private String type;
+	private String status;
+	private String technology;
+	private String mentors;
+	private String startDate;
+	private String endDate;
+
 	private List<WeekDto> weekdto;
 
 	public int getId() {
@@ -24,20 +28,20 @@ public class BatchFullDto
 		this.id = id;
 	}
 
-	public int getTrainingdays() {
-		return trainingdays;
+	public int getTrainingDays() {
+		return trainingDays;
 	}
 
-	public void setTrainingdays(int trainingdays) {
-		this.trainingdays = trainingdays;
+	public void setTrainingDays(int trainingDays) {
+		this.trainingDays = trainingDays;
 	}
 
-	public int getTotalcandidates() {
-		return totalcandidates;
+	public int getTotalCandidates() {
+		return totalCandidates;
 	}
 
-	public void setTotalcandidates(int totalcandidates) {
-		this.totalcandidates = totalcandidates;
+	public void setTotalCandidates(int totalCandidates) {
+		this.totalCandidates = totalCandidates;
 	}
 
 	public String getClientShortName() {
@@ -88,20 +92,20 @@ public class BatchFullDto
 		this.mentors = mentors;
 	}
 
-	public String getStartdate() {
-		return startdate;
+	public String getStartDate() {
+		return startDate;
 	}
 
-	public void setStartdate(String startdate) {
-		this.startdate = startdate;
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
 	}
 
-	public String getEnddate() {
-		return enddate;
+	public String getEndDate() {
+		return endDate;
 	}
 
-	public void setEnddate(String enddate) {
-		this.enddate = enddate;
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
 
 	public List<WeekDto> getWeekdto() {
@@ -111,9 +115,5 @@ public class BatchFullDto
 	public void setWeekdto(List<WeekDto> weekdto) {
 		this.weekdto = weekdto;
 	}
-
-		
-	
-	
 
 }
