@@ -96,22 +96,62 @@ public class BatchController {
 		return responce;
 	}
 
-	/*
-	 * @GetMapping("/batchdetails/{batchid}/weeks/dates") public BatchFullDto
-	 * getfulldetails(@PathVariable String batchid) { BatchFullDto fulldetail = new
-	 * BatchFullDto(); Batch b = bservice.getbatchdetail(Integer.parseInt(batchid));
-	 * fulldetail.setId(b.getId()); fulldetail.setBatchName(b.getBatchName());
-	 * fulldetail.setClientShortName(b.getClientShortName());
-	 * fulldetail.setEnddate(b.getEnddate()); fulldetail.setMentors(b.getMentors());
-	 * fulldetail.setStartdate(b.getStartdate());
-	 * fulldetail.setStatus(b.getStatus());
-	 * fulldetail.setTechnology(b.getTechnology());
-	 * fulldetail.setTotalcandidates(b.getTotalcandidates());
-	 * fulldetail.setTrainingdays(b.getTrainingdays());
-	 * fulldetail.setType(b.getType());
-	 * 
-	 * return null; }
-	 */
+	 @GetMapping("/batchdetails/{batchid}/weeks/dates") 
+	  public ResponceDto getfulldetails(@PathVariable String batchid) { 
+		   
+		  try {
+		  Batch batch =bservice.getbatchdetail(Integer.parseInt(batchid));
+		  fulldetail.setId(batch.getId()); fulldetail.setBatchName(batch.getBatchName());
+		  fulldetail.setClientShortName(batch.getClientShortName());
+		  fulldetail.setEnddate(batch.getEnddate()); fulldetail.setMentors(batch.getMentors());
+		  fulldetail.setStartdate(batch.getStartdate());
+		  fulldetail.setStatus(batch.getStatus());
+		  fulldetail.setTechnology(batch.getTechnology());
+		  fulldetail.setTotalcandidates(batch.getTotalcandidates());
+		  fulldetail.setTrainingdays(batch.getTrainingdays());
+		  fulldetail.setType(batch.getType());
+	  
+	  List<BatchWeek> batchweeklist = bservice.getbatchweekdetail(Integer.parseInt(batchid));
+	  List<WeekDto> weekdtolist = new ArrayList<>();
+	  
+	  for(BatchWeek batchweek :batchweeklist) {
+		  
+		  System.err.println("Batch week "+ batchweek.getId()+" batch id "+batchweek.getBatch().getId()+" week id "+batchweek.getWeek().getWeekid());
+		  
+		  //int weekid = batchweek.getWeek().getWeekid();
+		 // Week week = batchweek.getWeek();
+		  WeekDto weekdtolp=new WeekDto(); 
+		  weekdtolp.setId(batchweek.getWeek().getWeekid()); 
+		  weekdtolp.setNodays(batchweek.getWeek().getNodays());
+		  weekdtolp.setEnddate(batchweek.getWeek().getEnddate());
+		  weekdtolp.setNoweeks(batchweek.getWeek().getNoweeks());
+		  weekdtolp.setStartdate(batchweek.getWeek().getStartdate());
+		 weekdtolist.add(weekdtolp);
+	  	}
+	  for(WeekDto weekdto : weekdtolist) {
+	  List<WeekDate> weekdates = this.bservice.getweekdatedetail(weekdto.getId());
+	  List<Dates> dates = new ArrayList<>();
+		for (WeekDate weekdate : weekdates) {
+			Dates date = weekdate.getDate();
+			dates.add(date);
+		}
+		weekdto.setDates(dates);
+	  }
+	  
+	  	   //weekdtolist.add(weekdto);
+	  	   fulldetail.setWeekdto(weekdtolist);
+		   responce.setData(fulldetail);
+		   responce.setError(false);
+		   responce.setMessege("");
+		   return responce;
+		  }
+		  catch (Exception e) {
+			// TODO: handle exception
+			  responce.setData(null);responce.setError(true);responce.setMessege(e.getMessage());
+		}
+		return responce;
+	}
+
 
 	@GetMapping("/weekdetails/{weekid}")
 	public ResponceDto getweekdatedetails(@PathVariable String weekid) {
