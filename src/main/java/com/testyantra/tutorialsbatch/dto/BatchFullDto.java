@@ -1,9 +1,12 @@
 package com.testyantra.tutorialsbatch.dto;
 
+
 import java.util.List;
 
-import com.testyantra.tutorialsbatch.dto.WeekDto;
+import org.springframework.stereotype.Component;
 
+
+@Component
 public class BatchFullDto 
 {
 	private int id;
@@ -108,6 +111,8 @@ public class BatchFullDto
 	public void setWeekdto(List<WeekDto> weekdto) {
 		this.weekdto = weekdto;
 	}
+
+		
 	
 	
 
