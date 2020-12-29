@@ -23,56 +23,81 @@ import com.testyantra.tutorialsbatch.entities.Week;
 import com.testyantra.tutorialsbatch.entities.WeekDate;
 import com.testyantra.tutorialsbatch.service.BatchService;
 
+/**
+ * This is Class is Controller Class for CRUD operation of this project Which is
+ * responding to the requests from the clients or front end Which is build using
+ * spring boot, rest, maven,java 8
+ * 
+ * @author jalaj Kumar
+ */
+
 @RestController
 public class BatchController {
 
+	/** To Provide Service for Batch Object */
 	@Autowired
 	private BatchService batchService;
+
+	/** To Provide Responses for the Requests */
 	@Autowired
 	private ResponceDto responce;
+
+	/** To Store the BatchDto Object to process Response */
 	@Autowired
 	private BatchDto batchDto;
+
+	/** To Store the WeekDto Object to process Response */
 	@Autowired
 	private WeekDto weekDto;
-	@Autowired
-	BatchFullDto fullDetail;
 
+	/** To Store the BatchFullDto Object to process Response */
+	@Autowired
+	BatchFullDto batchFullDetail;
+
+	/**
+	 * Returns the all Batch Entity which is present the Database as a list of Batch
+	 * Object Request as get property
+	 */
 	@GetMapping("/batchdetails")
 	public ResponceDto getBatchDetails() {
 		try {
 			responce.setData(this.batchService.getBatchDetails());
-			responce.setMessege("");
 			responce.setError(false);
 			return responce;
 		} catch (Exception e) {
 			responce.setError(true);
-			responce.setMessege(e.getMessage());
 		}
 		return responce;
 	}
 
-	@GetMapping("/batchdetails/{batchid}")
+	/**
+	 * Returns the Single Batch Entity which is Satisfy the Id provided as the
+	 * Request as get property
+	 */
+	@GetMapping("/batchdetails/{batchId}")
 	public ResponceDto getBatchDetailById(@PathVariable String batchId) {
 		try {
 			responce.setData(this.batchService.getBatchDetail(Integer.parseInt(batchId)));
 			responce.setError(false);
-			responce.setMessege("");
 			return responce;
 		} catch (Exception e) {
 			responce.setError(true);
-			responce.setMessege(e.getMessage());
 		}
 		return responce;
 
 	}
 
-	@GetMapping("/batchdetails/{batchid}/weeks")
+	/**
+	 * Returns the Single batch Entity which is Satisfy the Id and list of weeks
+	 * which is mapped to batch Id and request as get property
+	 */
+	@GetMapping("/batchdetails/{batchId}/weeks")
 	public ResponceDto getBatchWeekDetails(@PathVariable String batchId) {
-		
+
 		try {
 			batchDto = new BatchDto();
 			Batch b = batchService.getBatchDetail(Integer.parseInt(batchId));
-			
+
 			batchDto.setId(b.getId());
 			batchDto.setBatchName(b.getBatchName());
 			batchDto.setClientShortName(b.getClientShortName());
@@ -95,33 +120,37 @@ public class BatchController {
 			batchDto.setWeeks(weeks);
 			responce.setError(false);
 			responce.setData(batchDto);
-			responce.setMessege("");
 			return responce;
 		} catch (Exception e) {
 			responce.setData(null);
 			responce.setError(true);
-			responce.setMessege(e.toString());
 		}
 		return responce;
 	}
 
-	@GetMapping("/batchdetails/{batchid}/weeks/dates")
+	/**
+	 * Returns the Single batch Entity which is Satisfy the Id and list of weeks
+	 * which is mapped to batch Id and for single week a list of Dates objects which
+	 * is mapped to week ID . This method returns Fully qualified data and sub data
+	 * as a request as get property
+	 */
+	@GetMapping("/batchdetails/{batchId}/weeks/dates")
 	public ResponceDto getFullDetails(@PathVariable String batchId) {
 
 		try {
 			Batch batch = batchService.getBatchDetail(Integer.parseInt(batchId));
-			
-			fullDetail.setId(batch.getId());
-			fullDetail.setBatchName(batch.getBatchName());
-			fullDetail.setClientShortName(batch.getClientShortName());
-			fullDetail.setEndDate(batch.getEndDate());
-			fullDetail.setMentors(batch.getMentors());
-			fullDetail.setStartDate(batch.getStartDate());
-			fullDetail.setStatus(batch.getStatus());
-			fullDetail.setTechnology(batch.getTechnology());
-			fullDetail.setTotalCandidates(batch.getTotalCandidates());
-			fullDetail.setTrainingDays(batch.getTrainingDays());
-			fullDetail.setType(batch.getType());
+
+			batchFullDetail.setId(batch.getId());
+			batchFullDetail.setBatchName(batch.getBatchName());
+			batchFullDetail.setClientShortName(batch.getClientShortName());
+			batchFullDetail.setEndDate(batch.getEndDate());
+			batchFullDetail.setMentors(batch.getMentors());
+			batchFullDetail.setStartDate(batch.getStartDate());
+			batchFullDetail.setStatus(batch.getStatus());
+			batchFullDetail.setTechnology(batch.getTechnology());
+			batchFullDetail.setTotalCandidates(batch.getTotalCandidates());
+			batchFullDetail.setTrainingDays(batch.getTrainingDays());
+			batchFullDetail.setType(batch.getType());
 
 			List<BatchWeek> batchWeekList = batchService.getBatchWeekDetail(Integer.parseInt(batchId));
 			List<WeekDto> weekDtoList = new ArrayList<>();
@@ -130,9 +159,6 @@ public class BatchController {
 
 				System.err.println("Batch week " + batchWeek.getId() + " batch id " + batchWeek.getBatch().getId()
 						+ " week id " + batchWeek.getWeek().getId());
-
-				// int weekid = batchweek.getWeek().getWeekid();
-				// Week week = batchweek.getWeek();
 				WeekDto weekDtoLp = new WeekDto();
 				weekDtoLp.setId(batchWeek.getWeek().getId());
 				weekDtoLp.setNoDays(batchWeek.getWeek().getNoDays());
@@ -150,25 +176,25 @@ public class BatchController {
 				}
 				weekDto.setDates(dates);
 			}
-
-			// weekdtolist.add(weekdto);
-			fullDetail.setWeekdto(weekDtoList);
-			responce.setData(fullDetail);
+			batchFullDetail.setWeekdto(weekDtoList);
+			responce.setData(batchFullDetail);
 			responce.setError(false);
-			responce.setMessege("");
 			return responce;
 		} catch (Exception e) {
 			// TODO: handle exception
 			responce.setData(null);
 			responce.setError(true);
-			responce.setMessege(e.getMessage());
 		}
 		return responce;
 	}
 
-	@GetMapping("/weekdetails/{weekid}")
+	/**
+	 * Returns the Single Week Entity which is Satisfy the Id provided as the
+	 * Request as get property
+	 */
+	@GetMapping("/weekdetails/{weekId}")
 	public ResponceDto getWeekDateDetails(@PathVariable String weekId) {
-		
+
 		try {
 
 			Week week = batchService.getWeekDetail(Integer.parseInt(weekId));
@@ -186,81 +212,91 @@ public class BatchController {
 			weekDto.setDates(dates);
 			responce.setData(weekDto);
 			responce.setError(false);
-			responce.setMessege("");
 
 			return responce;
 		} catch (Exception e) {
 			responce.setData(null);
 			responce.setError(true);
-			responce.setMessege(e.getMessage());
 			return responce;
 		}
 	}
 
+	/**
+	 * Returns the Single Batch Entity which is taken data from request body to
+	 * store in the database Request as Post property
+	 */
 	@PostMapping("/batchdetails")
 	public ResponceDto addBatchDetail(@RequestBody Batch batch) {
-		
+
 		try {
 			responce.setData(this.batchService.addBatch(batch));
 			responce.setError(false);
-			responce.setMessege("");
 			return responce;
 		} catch (Exception e) {
 			responce.setData(null);
 			responce.setError(true);
-			responce.setMessege(e.getMessage());
 		}
 		return responce;
 	}
 
+	/**
+	 * Returns the Single Batch Entity which is taken data from request body to
+	 * update in the database Request as Put property
+	 */
 	@PutMapping("/batchdetails")
 	public ResponceDto update(@RequestBody Batch batch) {
-		
+
 		try {
 			responce.setData(this.batchService.update(batch));
 			responce.setError(false);
-			responce.setMessege("");
 			return responce;
 		} catch (Exception e) {
 			responce.setData(null);
 			responce.setError(true);
-			responce.setMessege(e.getMessage());
 		}
 		return responce;
 	}
 
-	@DeleteMapping("/deletdetails/{batchid}")
-	public ResponceDto delete(@PathVariable String batchid) {
+	/**
+	 * Returns the Response as Deleted Successfully which is Deleted in the database
+	 * Request as Delete property
+	 */
+	@DeleteMapping("/deletdetails/{batchId}")
+	public ResponceDto delete(@PathVariable String batchId) {
 		try {
-			batchService.delete(Integer.parseInt(batchid));
+			batchService.delete(Integer.parseInt(batchId));
 			responce.setData("{ Deleted successfully }");
 			responce.setError(false);
-			responce.setMessege("");
 			return responce;
 		} catch (Exception e) {
 			responce.setData(null);
 			responce.setError(true);
-			responce.setMessege(e.getMessage());
 		}
 		return responce;
 	}
 
+	/**
+	 * Returns the Single Week Entity which is taken data from request body to store
+	 * in the database Request as Post property
+	 */
 	@PostMapping("/weeks")
 	public Week addFullDetail(@RequestBody Week week) {
 		return this.batchService.addWeek(week);
 	}
 
+	/**
+	 * Returns the all Dates Entity which is present the Database as a list of Dates
+	 * Object Request as get property
+	 */
 	@GetMapping("/dates")
 	public ResponceDto getDateDetails() {
 		try {
 			responce.setData(this.batchService.getDateDetails());
 			responce.setError(false);
-			responce.setMessege("");
 			return responce;
 		} catch (Exception e) {
 			responce.setData(null);
 			responce.setError(true);
-			responce.setMessege(e.getMessage());
 			return responce;
 		}
 	}

@@ -7,18 +7,32 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+/**
+ * This Class is the Mapping Class of two Entity Classes of Week and Date class
+ * which is having the foreign keys in it. Returns the Mapped Week and Date
+ * object.
+ * 
+ * @author Jalaj Kumar
+ */
 @Entity
 public class WeekDate {
 
+	/** To store the private key value of this class as Id */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+
+	/** To Map the Week Class with an aggrigation of Many to One */
 	@ManyToOne
 	@JoinColumn(name = "weekid", referencedColumnName = "id", nullable = false)
 	private Week week;
+
+	/** To Map the Dates Class with an aggrigation of Many to One */
 	@ManyToOne
 	@JoinColumn(name = "dateid", referencedColumnName = "id", nullable = false)
 	private Dates date;
+
+	/** getters and setters of it */
 
 	public int getId() {
 		return id;

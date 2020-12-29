@@ -7,18 +7,40 @@ import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+/**This class is Entity class to store the Batch details which is having some members 
+ * @author jalaj Kumar 
+ * 
+ * */
+
 @Entity
 public class Batch {
+	/**
+	 * this is private key for this entity class name is ID
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	/**
+	 * this is member of this class to store the number of days are there in this
+	 * batch
+	 */
 	private int trainingDays;
+	/**
+	 * this is member of the class to store the number of candidates are there in
+	 * this batch
+	 */
 	private int totalCandidates;
+	/** To store the Short name of the candidate */
 	private String clientShortName;
+	/** To store the Batch name */
 	private String batchName;
+	/** To store the Particular type of the Batch */
 	private String type;
+	/** To store the Status of the Batch */
 	private String status;
+	/** To store the Technology which is teach in this batch */
 	private String technology;
+	/** To store the mentors name of this batch */
 	private String mentors;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
@@ -44,6 +66,8 @@ public class Batch {
 		this.endDate = endDate;
 
 	}
+
+	/** Getters and Setters of the Batch Class */
 
 	public int getId() {
 		return id;

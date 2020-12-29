@@ -16,97 +16,118 @@ import com.testyantra.tutorialsbatch.entities.Dates;
 import com.testyantra.tutorialsbatch.entities.Week;
 import com.testyantra.tutorialsbatch.entities.WeekDate;
 
+/**
+ * This is an Implementation class of an BatchService interface to fetch the
+ * entity details returns the Entity Objects
+ * 
+ * @author Jalaj kumar
+ */
+
 @Service
 public class BatchServiceImpl implements BatchService {
 
-	// List<Batch> batchlist;
+	/** To Access the Batch Entity Object */
+	@Autowired
+	private BatchDao batchDao;
 
+	/** To Access the Week Entity Object */
 	@Autowired
-	private BatchDao bdao;
-	@Autowired
-	private WeekDao wdao;
-	@Autowired
-	private BatchWeekDao bwdao;
-	@Autowired
-	private WeekDateDao wbdao;
-	@Autowired
-	private DateDao ddao;
+	private WeekDao weekDao;
 
-	public BatchServiceImpl()
+	/** To Access the BatchWeek Entity Object */
+	@Autowired
+	private BatchWeekDao batchWeekDao;
 
-	{
-		/*
-		 * this.batchlist=new ArrayList<>(); batchlist.add(new Batch(001, 3, 100,
-		 * "clientShortName", "batchName", "type", "status", "technology", "mentors",
-		 * "startdate", "enddate")); batchlist.add(new Batch(002, 3, 100,
-		 * "clientShortName", "batchName", "type", "status", "technology", "mentors",
-		 * "startdate", "enddate")); batchlist.add(new Batch(003, 3, 100,
-		 * "clientShortName", "batchName", "type", "status", "technology", "mentors",
-		 * "startdate", "enddate"));
-		 */
+	/** To Access the WeekDate Entity Object */
+	@Autowired
+	private WeekDateDao weekDateDao;
+
+	/** To Access the Date Entity Object */
+	@Autowired
+	private DateDao dateDao;
+
+	public BatchServiceImpl() {
 
 	}
 
+	/**
+	 * Returns the List of the Bath Class Object which is fetched from the Database
+	 */
 	@Override
 	public List<Batch> getBatchDetails() {
 		// TODO Auto-generated method stub
-		return (List<Batch>) bdao.findAll();
+		return (List<Batch>) batchDao.findAll();
 	}
 
+	/** Returns the Bath Class Object which is Saved or stored to the Database */
 	@Override
 	public Batch addBatch(Batch batch) {
 		// TODO Auto-generated method stub
-		// batchlist.add(batch);
-
-		return bdao.save(batch);
+		return batchDao.save(batch);
 	}
 
+	/** Returns the Bath Class Object which is Updated in the Database */
 	@Override
 	public Batch update(Batch batch) {
 		// TODO Auto-generated method stub
-		return bdao.save(batch);
+		return batchDao.save(batch);
 	}
 
+	/** Returns nothing to delete the Batch entity Database */
 	@Override
-	public void delete(int batchid) {
+	public void delete(int batchId) {
 		// TODO Auto-generated method stub
-		bdao.deleteById(batchid);
+		batchDao.deleteById(batchId);
 	}
 
+	/**
+	 * Returns the List of the Mapped Class of WeekDate Class Object which is
+	 * fetched from the Database
+	 */
 	@Override
-	public List<BatchWeek> getBatchWeekDetail(int batchid) {
-		List<BatchWeek> batchweek = bwdao.findAllBybatchId(batchid);
-		return batchweek;
+	public List<BatchWeek> getBatchWeekDetail(int batchId) {
+		List<BatchWeek> batchWeek = batchWeekDao.findAllBybatchId(batchId);
+		return batchWeek;
 	}
 
+	/** Returns the Bath Class Object which is fetched from the Database */
 	@Override
-	public Batch getBatchDetail(int batchid) {
+	public Batch getBatchDetail(int batchId) {
 		// TODO Auto-generated method stub
-		return bdao.findById(batchid).orElse(new Batch());
+		return batchDao.findById(batchId).orElse(new Batch());
 	}
 
+	/** Returns the Week Class Object which is Saved or stored to the Database */
 	@Override
 	public Week addWeek(Week week) {
 		// TODO Auto-generated method stub
-		return wdao.save(week);
+		return weekDao.save(week);
 	}
 
+	/**
+	 * Returns the List of the Dates Class Object which is fetched from the Database
+	 */
 	@Override
 	public List<Dates> getDateDetails() {
 		// TODO Auto-generated method stub
-		return (List<Dates>) ddao.findAll();
+		return (List<Dates>) dateDao.findAll();
 	}
 
+	/** Returns the Week Class Object which is fetched from the Database */
 	@Override
-	public Week getWeekDetail(int weekid) {
+	public Week getWeekDetail(int weekId) {
 		// TODO Auto-generated method stub
-		return wdao.findById(weekid).orElse(new Week());
+		return weekDao.findById(weekId).orElse(new Week());
 	}
 
+	/**
+	 * Returns the List of the Mapped Class of WeekDate Class Object which is
+	 * fetched from the Database
+	 */
 	@Override
-	public List<WeekDate> getWeekDateDetail(int weekid) {
+	public List<WeekDate> getWeekDateDetail(int weekId) {
 		// TODO Auto-generated method stub
-		List<WeekDate> weekDate = wbdao.findAllByweekId(weekid);
+		List<WeekDate> weekDate = weekDateDao.findAllByweekId(weekId);
 
 		return weekDate;
 	}
