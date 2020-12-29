@@ -6,9 +6,22 @@ import org.springframework.stereotype.Component;
 
 import com.testyantra.tutorialsbatch.entities.Week;
 
+/**
+ * This class is Data Transfer Object Class is having the Members same as Batch
+ * class and extra added member is Week class lists and returns the BatchDto
+ * objects as response body. The main purpose of this is class is for Customized
+ * response body
+ * 
+ * @author Jalaj Kumar
+ */
+
 @Component
 public class BatchDto {
 
+	/**
+	 * These members are same as Batch class members and added one extra member is
+	 * List of Week object
+	 */
 	private int id;
 	private int trainingDays;
 	private int totalCandidates;
@@ -22,6 +35,8 @@ public class BatchDto {
 	private String endDate;
 
 	private List<Week> weeks;
+
+	/** getters and setters */
 
 	public int getId() {
 		return id;

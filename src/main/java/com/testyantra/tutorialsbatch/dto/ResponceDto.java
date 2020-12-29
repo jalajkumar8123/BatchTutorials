@@ -2,21 +2,25 @@ package com.testyantra.tutorialsbatch.dto;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * This is Common Class for all Response Body which is having to check the error
+ * and exceptions
+ * 
+ * @author Jalaj Kumar
+ */
 @Component
 public class ResponceDto {
 
+	/**
+	 * to check the exception present or not returns true if error present or else
+	 * false
+	 */
 	private boolean error;
+
+	/** to store the Object which is set by Dto object */
 	private Object data;
-	private String messege;
 
-	public String getMessege() {
-		return messege;
-	}
-
-	public void setMessege(String messege) {
-		this.messege = messege;
-	}
-
+	/**Getters and Setters */
 	public boolean isError() {
 		return error;
 	}

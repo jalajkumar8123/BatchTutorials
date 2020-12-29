@@ -6,8 +6,21 @@ import org.springframework.stereotype.Component;
 
 import com.testyantra.tutorialsbatch.entities.Dates;
 
+/**
+ * This class is Data Transfer Object Class is having the Members same as Week
+ * class and extra added member is Dates class lists and returns the WeekDto
+ * objects as response body.The main purpose of this is class is for Customized
+ * response body
+ * 
+ * @author Jalaj Kumar
+ */
 @Component
 public class WeekDto {
+
+	/**
+	 * These members are same as Week class members and added one extra member is
+	 * List of Dates object
+	 */
 	private int id;
 	private String startDate;
 	private String endDate;
@@ -16,6 +29,7 @@ public class WeekDto {
 
 	private List<Dates> dates;
 
+	/** getters and setters */
 	public int getId() {
 		return id;
 	}

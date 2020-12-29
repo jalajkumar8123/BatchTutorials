@@ -4,8 +4,21 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * This class is Data Transfer Object Class. This is having the Members same as Batch
+ * class and extra added member is WeekDto class lists and returns the BatchFullDto
+ * objects as response body.The main purpose of this is class is for Customized
+ * response body
+ * 
+ * @author Jalaj Kumar 
+ */
 @Component
 public class BatchFullDto {
+	
+	/**
+	 * These members are same as Batch class members and added one extra member is
+	 * List of WeekDto object
+	 */
 	private int id;
 	private int trainingDays;
 	private int totalCandidates;

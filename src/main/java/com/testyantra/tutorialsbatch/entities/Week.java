@@ -5,22 +5,31 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * This is class is an Entity class which is store the details of the Week
+ * Object
+ * 
+ * @author Jalaj kumar
+ */
 
 @Entity
-public class Week
-{
+public class Week {
+
+	/** To store the private key value of this class as Id */
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	/** To store the Start date detail of this class */
 	private String startDate;
+	/** To store the End date detail of this class */
 	private String endDate;
+	/** TO store the Number of Weeks are Present in it */
 	private int noWeeks;
+	/** To store the Number of Days are Present in it */
 	private int noDays;
-	
-	//@Autowired
-	//private Datedetails datedetails;
-	
-	public Week() {}
+
+	public Week() {
+	}
 
 	public Week(int id, String startDate, String endDate, int noWeeks, int noDays) {
 		super();
@@ -29,9 +38,9 @@ public class Week
 		this.endDate = endDate;
 		this.noWeeks = noWeeks;
 		this.noDays = noDays;
-		//this.datedetails = datedetails;
 	}
 
+	/** getters and setters of it */
 	public int getId() {
 		return id;
 	}
